@@ -10,11 +10,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import kotlinx.coroutines.delay
 
-@Preview
 @Composable
-fun SplashScreen() {
+fun SplashScreen(onTimeout: () -> Unit) {
     LaunchedEffect(Unit) {
         delay(1500)
+        onTimeout()
     }
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         CircularProgressIndicator()

@@ -11,6 +11,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import com.rishu.quizapplication.ui.screens.QuestionScreen
+import com.rishu.quizapplication.ui.screens.SplashScreen
 import com.rishu.quizapplication.ui.theme.QuizApplicationTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.text.get
@@ -28,7 +29,11 @@ class MainActivity : ComponentActivity() {
             val streak by viewModel.streak.collectAsState()
             QuizApplicationTheme {
                 Box(modifier = Modifier.systemBarsPadding()) {
-                    if (questions.isNotEmpty()) {
+                    if (questions.isEmpty()) {
+                        SplashScreen {
+                            viewModel.restartQuiz()
+                        }
+                    } else {
                         QuestionScreen(
                             question = questions[index],
                             streak = streak,
