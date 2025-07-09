@@ -1,6 +1,11 @@
 package com.rishu.quizapplication.ui.screens
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -9,6 +14,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Badge
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
@@ -24,6 +31,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.rishu.quizapplication.data.model.Question
 import kotlinx.coroutines.delay
 
@@ -71,6 +79,20 @@ fun QuestionScreen(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text("Streak: $streak", style = MaterialTheme.typography.bodyLarge)
+            if (streak >= 3) {
+                Spacer(modifier = Modifier.width(8.dp))
+                AnimatedVisibility(
+                    visible = true,
+                    enter = fadeIn(animationSpec = tween(500)) + scaleIn(),
+                    exit = fadeOut()
+                ) {
+                    Badge(
+                        containerColor = Color.Yellow
+                    ) {
+                        Text("🔥 Keep going", fontSize = 18.sp)
+                    }
+                }
+            }
         }
 
         Spacer(Modifier.height(16.dp))
