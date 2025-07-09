@@ -15,7 +15,8 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val repository: QuizRepository
-): ViewModel() {
+) : ViewModel() {
+
     private val _questions = MutableStateFlow<List<Question>>(emptyList())
     val questions: StateFlow<List<Question>> = _questions
 
@@ -25,11 +26,16 @@ class MainViewModel @Inject constructor(
     private val _streak = MutableStateFlow(0)
     val streak: StateFlow<Int> = _streak
 
+    private val _result = MutableStateFlow<ResultState?>(null)
+    val result: StateFlow<ResultState?> = _result
+
 
     private var correctAnswers = 0
     private var longestStreak = 0
 
-    init { load() }
+    init {
+        load()
+    }
 
     private fun load() {
         viewModelScope.launch {
@@ -60,7 +66,11 @@ class MainViewModel @Inject constructor(
         if (_currentIndex.value < _questions.value.lastIndex) {
             _currentIndex.value += 1
         } else {
-            //send final result
+            _result.value = ResultState(
+                correct = correctAnswers,
+                total = _questions.value.size,
+                longestStreak = longestStreak
+            )
         }
     }
 
@@ -69,5 +79,6 @@ class MainViewModel @Inject constructor(
         _streak.value = 0
         correctAnswers = 0
         longestStreak = 0
+        _result.value = null
     }
 }
