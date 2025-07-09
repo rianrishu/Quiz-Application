@@ -32,6 +32,7 @@ class MainActivity : ComponentActivity() {
 
             QuizApplicationTheme {
                 Box(modifier = Modifier.systemBarsPadding()) {
+                    //Strings could have been retrived from resources
                     if (questions.isEmpty()) {
                         SplashScreen {
                             viewModel.restartQuiz()

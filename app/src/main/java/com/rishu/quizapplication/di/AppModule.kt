@@ -16,6 +16,10 @@ import kotlin.jvm.java
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
+    //Base URL can be defined in build.gradle file and can be changed based on flavours,
+    // but for simplicity, I'm are defining it here.
+
+    // Interceptor can also be added to add headers or logging.
     @Provides
     @Singleton
     fun provideRetrofit(): Retrofit = Retrofit.Builder()
