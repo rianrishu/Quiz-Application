@@ -37,6 +37,7 @@ class MainViewModel @Inject constructor(
     }
 
     private fun load() {
+        // Error handling of the API could have been done
         viewModelScope.launch {
             _questions.value = repository.loadQuestions()
         }
