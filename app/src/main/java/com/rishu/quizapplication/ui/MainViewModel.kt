@@ -29,7 +29,6 @@ class MainViewModel @Inject constructor(
     private val _result = MutableStateFlow<ResultState?>(null)
     val result: StateFlow<ResultState?> = _result
 
-
     private var correctAnswers = 0
     private var longestStreak = 0
 
