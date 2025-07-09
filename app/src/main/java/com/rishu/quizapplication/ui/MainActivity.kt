@@ -1,4 +1,4 @@
-package com.rishu.quizapplication
+package com.rishu.quizapplication.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
